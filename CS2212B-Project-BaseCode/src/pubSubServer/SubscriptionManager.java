@@ -12,8 +12,16 @@ import subscribers.AbstractSubscriber;
 public class SubscriptionManager {
 
 	private ChannelPoolManager cpManager;
+	private static SubscriptionManager instance = null;
+	
+	private SubscriptionManager() {
+		cpManager = ChannelPoolManager.getInstance();
+	}
 	
 	public static SubscriptionManager getInstance() {
+		if(instance == null) {
+			instance = new SubscriptionManager();
+		}
 		return instance;
 	}
 	
