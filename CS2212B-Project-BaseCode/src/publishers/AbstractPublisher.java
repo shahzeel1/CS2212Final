@@ -2,7 +2,7 @@ package publishers;
 
 import baseEntities.IEntity;
 import events.AbstractEvent;
-import strategies.publisher.IStrategy;
+import strategies.publisher.AbstractStrategy;
 
 /**
  * @author kkontog, ktsiouni, mgrigori base Interface implemented by all
@@ -10,7 +10,7 @@ import strategies.publisher.IStrategy;
  */
 public abstract class AbstractPublisher implements IEntity {
 
-	protected IStrategy publishingStrategy = null;
+	protected AbstractStrategy publishingStrategy = null;
 	/**
 	 * all implementations of this Interface MUST contain an instance variable of 
 	 * type {@link IStrategy} which has the methods:
