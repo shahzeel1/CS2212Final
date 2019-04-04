@@ -1,4 +1,6 @@
 package strategies.publisher;
+import events.AbstractEvent;
+import strategies.publisher.StrategyName;
 
 /**
  * @author kkontog, ktsiouni, mgrigori
@@ -14,18 +16,20 @@ public class StrategyFactory {
 	 * @param strategyName a value from the {@link StrategyName} enumeration specifying the strategy to be created 
 	 * @return the newly created {@link IStrategy} instance 
 	 */
-	public static IStrategy createStrategy(StrategyName strategyName) {
-		IStrategy strategy;
+	public static AbstractStrategy createStrategy(StrategyName strategyName, int publisherId, AbstractEvent event) {
 		switch(strategyName) {
 			case AStrategy:
-				strategy = new AStrategy();
-				return strategy;
+				if (event==null)
+					return new AStrategy(publisherId);
+				return  new AStrategy(publisherId,event);
 			case BStrategy:
-				strategy = new BStrategy();
-				return strategy;
+				if (event==null)
+					return new AStrategy(publisherId);
+				return  new BStrategy(publisherId,event);
 			default:
-				strategy = new DefaultStrategy();
-				return strategy;
+				if (event==null)
+					return new AStrategy(publisherId);
+				return  new DefaultStrategy(publisherId,event);
 		}
 	}
 	

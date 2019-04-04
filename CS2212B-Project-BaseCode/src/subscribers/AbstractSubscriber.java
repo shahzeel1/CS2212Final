@@ -2,11 +2,6 @@ package subscribers;
 
 import baseEntities.IEntity;
 import events.AbstractEvent;
-import states.subscriber.IState;
-import states.subscriber.StateFactory;
-import states.subscriber.StateName;
-
-
 /**
  * @author kkontog, ktsiouni, mgrigori
  * the base Interface for the Subscriber hierarchy
@@ -14,7 +9,7 @@ import states.subscriber.StateName;
 public abstract class AbstractSubscriber implements IEntity {
 	
 	
-	protected IState state;
+	protected AbstractState state;
 
 	/**
 	 * set's the {@link IState} for this ISubscriber implementation using the {@link StateFactory}
