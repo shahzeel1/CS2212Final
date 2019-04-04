@@ -17,15 +17,8 @@ public class ChannelCreator {
 		// keeping the same map
 		// keep a map between the name and the 9bhect that's been created
 		// addChannel
-		
-		
 		//CREATE A CHANNEL HERE
-		
-		
-		
-		cpm = ChannelPoolManager.getInstance();
-		System.out.print("Channel x created"); //CHANGE x????!!!
-		
+		cpm = ChannelPoolManager.getInstance();		
 	}
 	
 	protected static ChannelCreator getInstance() {
