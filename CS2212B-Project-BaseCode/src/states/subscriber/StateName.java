@@ -7,5 +7,5 @@ package states.subscriber;
  * note that normally, for each new implementation of the {@link IState} interface, a new entry must be added here
  */
 public enum StateName {
-	astate, defaultState
+	astate, bstate, defaultState
 }
