@@ -1,3 +1,7 @@
 /IStrategy.class
 /StrategyFactory.class
 /StrategyName.class
+/AStrategy.class
+/AbstractStrategy.class
+/BStrategy.class
+/DefaultStrategy.class
