@@ -1,6 +1,8 @@
 package events;
 
 import publishers.AbstractPublisher;
+import states.subscriber.AState;
+import states.subscriber.DefaultState;
 
 
 /**
@@ -20,8 +22,14 @@ public class EventFactory {
 	 * @return
 	 */
 	public static AbstractEvent createEvent(EventType eventType, int eventPublisherId, EventMessage payload) {
-
-		return null;
+		EventIDMaker id = new EventIDMaker();
+		switch(eventType) {
+		case TypeA : 
+			return new EventTypeA(id.getNewEventID(),eventPublisherId,payload);
+		case TypeB :
+			return new EventTypeB(id.getNewEventID(),eventPublisherId,payload);
+		default:
+			return new EventTypeC(id.getNewEventID(),eventPublisherId,payload);
 	}
 	
 }
