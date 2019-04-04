@@ -12,12 +12,18 @@ import subscribers.AbstractSubscriber;
  */
 public class ChannelDiscovery {
 	
+	private static ChannelDiscovery instance = null; // added this
 	
-	public static ChannelDiscovery getInstance() {
-		return instance;
+	private ChannelDiscovery() { // added this
+		
 	}
 	
-	
+	public static ChannelDiscovery getInstance() {
+		if (instance == null) {
+			instance = new ChannelDiscovery();
+		}
+		return instance; // only this line was here originally
+	}
 	
 	/**
 	 * 

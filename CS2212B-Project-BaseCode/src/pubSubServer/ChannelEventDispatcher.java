@@ -14,9 +14,17 @@ import publishers.AbstractPublisher;
 public class ChannelEventDispatcher {
 
 	private ChannelPoolManager cpManager;
+	private static ChannelEventDispatcher instance = null; // added this line here
+	
+	private ChannelEventDispatcher() { // added this here
+		cpManager = ChannelPoolManager.getInstance();
+	}
 	
 	public static ChannelEventDispatcher getInstance() {
-		return instance;
+		if(instance == null) {
+			instance = new ChannelEventDispatcher();
+		}
+		return instance; // originally only this was here ??
 	}
 
 	

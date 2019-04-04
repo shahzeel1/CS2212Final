@@ -17,9 +17,17 @@ import subscribers.AbstractSubscriber;
  * 
  */
 public class ChannelAccessControl {
-
+	
+	private static ChannelAccessControl instance = null; // added this
+	
+	private ChannelAccessControl() { // added this
+		// what do I do here?
+	}
 	
 	protected static ChannelAccessControl getInstance() {
+		if (instance == null ) {
+			instance = new ChannelAccessControl();
+		}
 		return instance;
 	}
 	Map<String, List<AbstractSubscriber>> blackList = new HashMap<>();
