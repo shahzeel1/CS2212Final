@@ -1,8 +1,7 @@
 package events;
 
 import publishers.AbstractPublisher;
-import states.subscriber.AState;
-import states.subscriber.DefaultState;
+
 
 
 /**
@@ -11,7 +10,7 @@ import states.subscriber.DefaultState;
  */
 public class EventFactory {
 
-	
+
 	/**
 	 * This is an implementation of the Factory Method design pattern
 	 * Creates an instance of any of the subclasses derived from the top level class AbstractEvent
@@ -30,6 +29,7 @@ public class EventFactory {
 			return new EventTypeB(id.getNewEventID(),eventPublisherId,payload);
 		default:
 			return new EventTypeC(id.getNewEventID(),eventPublisherId,payload);
+		}
+
 	}
-	
 }
