@@ -22,8 +22,6 @@ import subscribers.SubscriberType;
 public class Orchestration {
 
 	public static void main(String[] args) {
-		
-		// I ADDED A COMMENT
 
 		List<AbstractPublisher> listOfPublishers = new ArrayList<>();
 		List<AbstractSubscriber> listOfSubscribers = new ArrayList<>();
