@@ -1,6 +1,8 @@
 package subscribers;
 
+import publishers.ConcretePublisher;
 import states.subscriber.StateName;
+import states.subscriber.StateFactory;
 
 
 /**
@@ -25,6 +27,17 @@ public class SubscriberFactory {
 		AbstractSubscriber CSA = null;
 		switch (subscriberType) {
 			case alpha : 
+				CSA = new ConcreteSubscriberA();
+				CSA.setState(stateName);
+				System.out.println("Subscriber " + subscriberType + " " + stateName + " created");
+				return CSA;
+			case beta:
+				CSA = new ConcreteSubscriberA();
+				CSA.setState(stateName);
+				return CSA;
+			case gamma:
+				CSA = new ConcreteSubscriberA();
+				CSA.setState(stateName);
 				return CSA;
 			default:
 				return CSA;

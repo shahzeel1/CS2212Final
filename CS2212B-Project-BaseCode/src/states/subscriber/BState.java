@@ -1,12 +1,10 @@
 package states.subscriber;
-import states.subscriber.AbstractState;
+
 import events.AbstractEvent;
 
-public class BState extends AbstractState{
+public class BState implements IState{
 	
-	protected BState(AbstractEvent event, String channelName)
-	{
-		super(event,channelName);
+	public void handleEvent(AbstractEvent event, String channelName) {
+		
 	}
-
 }

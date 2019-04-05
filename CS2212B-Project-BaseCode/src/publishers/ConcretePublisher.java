@@ -1,7 +1,9 @@
 package publishers;
 
 import events.AbstractEvent;
-import strategies.publisher.AbstractStrategy;
+import strategies.publisher.IStrategy;
+import strategies.publisher.StrategyFactory;
+
 
 /**
  * @author kkontog, ktsiouni, mgrigori
@@ -20,7 +22,7 @@ public class ConcretePublisher extends AbstractPublisher {
 	 * @param concreteStrategy attaches a concreteStrategy generated from the {@link StrategyFactory#createStrategy(strategies.publisher.StrategyName)}
 	 * method
 	 */
-	protected ConcretePublisher(AbstractStrategy concreteStrategy) {
+	protected ConcretePublisher(IStrategy concreteStrategy) {
 		this.publishingStrategy = concreteStrategy;
 	}
 
@@ -29,7 +31,7 @@ public class ConcretePublisher extends AbstractPublisher {
 	 */
 	@Override
 	public void publish(AbstractEvent event) {
-		this.publishingStrategy = new AbstractStrategy(this.hashCode(), event);
+		publishingStrategy.doPublish(event, this.hashCode());
 	}
 
 	/* (non-Javadoc)
@@ -37,7 +39,7 @@ public class ConcretePublisher extends AbstractPublisher {
 	 */
 	@Override
 	public void publish() {
-		publishingStrategy = new AbstractStrategy(this.hashCode());
+		publishingStrategy.doPublish(this.hashCode());
 	}
 
 }

@@ -1,15 +1,16 @@
 package strategies.publisher;
-import events.AbstractEvent;
 
-public class AStrategy extends AbstractStrategy{
-	protected AStrategy (int publisherId)
-	{
-		super(publisherId);
+import events.AbstractEvent;
+import publishers.AbstractPublisher;
+
+
+public class AStrategy implements IStrategy{
+
+	public void doPublish(int publisherId) {
+		
 	}
 	
-	protected AStrategy(int publisherId, AbstractEvent event)
-	{
-		super(publisherId, event);
+	public void doPublish(AbstractEvent event, int publisherId) {
+		
 	}
-
 }

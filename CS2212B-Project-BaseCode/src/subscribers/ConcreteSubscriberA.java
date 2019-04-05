@@ -2,7 +2,7 @@ package subscribers;
 
 import events.AbstractEvent;
 import pubSubServer.SubscriptionManager;
-import states.subscriber.AbstractState;
+import states.subscriber.IState;
 import states.subscriber.StateFactory;
 import states.subscriber.StateName;
 
