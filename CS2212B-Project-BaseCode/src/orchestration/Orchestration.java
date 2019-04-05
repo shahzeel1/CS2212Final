@@ -75,7 +75,6 @@ public class Orchestration {
 			publisher.publish();
 		}
 		
-
 		//Method to parse the driver.txt file
 		BufferedReader driver;
 		try {
@@ -108,6 +107,7 @@ public class Orchestration {
 						
 						while(it.hasNext()) {
 							 sub = it.next();
+							 //System.out.println(sub);
 							 if(sub.getID() == sub_id) {
 								subManager.subscribe(channel_name, sub);
 								break;
@@ -179,10 +179,11 @@ public class Orchestration {
 			String[] StateConfigArray = StateConfigLine.split("\t");
 			int[] StateConfigIntArray = new int[2];
 			for(int i = 0; i < StateConfigArray.length; i++)
-				StateConfigIntArray[i] = Integer.parseInt(StateConfigArray[i]);
+				StateConfigIntArray[i] = Integer.parseInt(StateConfigArray[i]);			
 			newSub = SubscriberFactory.createSubscriber(
 					SubscriberType.values()[StateConfigIntArray[0]], 
-					StateName.values()[StateConfigIntArray[1]]);
+					StateName.values()[StateConfigIntArray[1]],
+					StateConfigIntArray[0]);
 			listOfSubscribers.add(newSub);
 		}
 		StateBufferedReader.close();

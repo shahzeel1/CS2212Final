@@ -21,10 +21,11 @@ public abstract class AbstractSubscriber implements IEntity {
 	 */
 	public void setState(StateName stateName) {};
 	
+	public void setID(int id) {};
+	
 	public int getID() {
-		return 0; //placeholder 0 to return
-	};
-
+		return 0; // placeholder, is supposed to be overridden
+	}
 	
 	/**
 	 * is the function called each time an event is published to one of the channels that the 

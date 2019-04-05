@@ -13,16 +13,19 @@ import states.subscriber.StateName;
  */
 class ConcreteSubscriberA extends AbstractSubscriber { 
 	
-	private static int subscriberID = 0;
+	private int subscriberID = 0;
 
 	protected ConcreteSubscriberA() {
-		subscriberID++;
 		state = StateFactory.createState(StateName.defaultState);
 	}
 	
+	public void setID(int id) {
+		subscriberID = id;
+	};
+	
 	public int getID() {
 		return subscriberID;
-	}
+	};
 	
 	/* (non-Javadoc)
 	 * @see subscribers.ISubscriber#setState(states.subscriber.StateName)
