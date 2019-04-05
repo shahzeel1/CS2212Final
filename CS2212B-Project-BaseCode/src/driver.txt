@@ -1,3 +1,3 @@
-SUB 0 cars   			// subscriber with ID 0 is subscribing to channel cars
-PUB 0 TypeA h1 p1		// publisher with ID 0 publishes event with type TypeA and with header h1 and payload p1
-BLOCK 0 cars				// Subscriber with ID 0 is blocked from channel cars
+SUB 0 cars   		
+PUB 0 TypeA h1 p1		
+BLOCK 0 cars			
