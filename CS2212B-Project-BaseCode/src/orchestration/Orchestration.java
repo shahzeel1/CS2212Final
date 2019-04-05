@@ -10,13 +10,19 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.StringTokenizer;
 
+import events.AbstractEvent;
+import events.EventFactory;
+import events.EventMessage;
+import events.EventType;
 import pubSubServer.AbstractChannel;
 import pubSubServer.ChannelDiscovery;
+import pubSubServer.ChannelEventDispatcher;
 import pubSubServer.SubscriptionManager;
 import publishers.AbstractPublisher;
 import publishers.PublisherFactory;
 import publishers.PublisherType;
 import states.subscriber.StateName;
+import strategies.publisher.IStrategy;
 import strategies.publisher.StrategyName;
 import subscribers.AbstractSubscriber;
 import subscribers.SubscriberFactory;
@@ -122,6 +128,38 @@ public class Orchestration {
 							event_type = st.nextToken();
 							event_header = st.nextToken();
 							event_payload = st.nextToken();
+							//Create the event
+							EventMessage msg = new EventMessage(event_header, event_payload);
+							EventType type;
+							switch(event_type) {
+								case "TypeA": 
+									type = EventType.values()[2];
+								case "TypeB": 
+									type = EventType.values()[1];
+								default: 
+									type = EventType.values()[0];
+							}
+							AbstractEvent event = EventFactory.createEvent(type, pub_id, msg);
+							
+							//Find the publisher
+							
+							Iterator<AbstractPublisher> pubItr = listOfPublishers.iterator();
+							AbstractPublisher pub;
+							
+							while(pubItr.hasNext()) {
+								pub = pubItr.next();
+								 if(pub.getID() == pub_id) {
+									IStrategy strategy = pub.getStrategy();
+									break;
+								 }
+							}
+							//WE NEED TO FIGURE OUT WHICH CHANNELS TO POST TO BASED ON THE PUB STRATEGY
+							//Publish
+							ChannelEventDispatcher channelDispatch = ChannelEventDispatcher.getInstance();
+							//channelDispatch.postEvent(event, listOfChannels);
+						}
+						else {
+							//Letitia put your code here
 						}
 					}
 					else if(firstWord.equals("BLOCK")) {
@@ -140,6 +178,7 @@ public class Orchestration {
 					}
 					newLine = driver.readLine();
 				}
+				driver.close();
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

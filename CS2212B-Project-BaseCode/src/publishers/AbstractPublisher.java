@@ -33,6 +33,15 @@ public abstract class AbstractPublisher implements IEntity {
 	 * @param event an event which is to be published
 	 * 
 	 */
-	public void publish() {};
+	public void publish() {}
+
+	public int getID() {
+		// TEMPORARY, NEED TO FIGURE OUT THIS PART
+		return 0;
+	};
+	
+	public IStrategy getStrategy() {
+		return this.publishingStrategy;
+	};
 
 }

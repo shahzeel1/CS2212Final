@@ -41,5 +41,10 @@ public class ConcretePublisher extends AbstractPublisher {
 	public void publish() {
 		publishingStrategy.doPublish(this.hashCode());
 	}
+	
+	@Override
+	public IStrategy getStrategy() {
+		return this.publishingStrategy;
+	};
 
 }
