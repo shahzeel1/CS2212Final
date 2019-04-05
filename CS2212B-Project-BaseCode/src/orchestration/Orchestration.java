@@ -2,6 +2,7 @@ package orchestration;
 
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -29,51 +30,63 @@ public class Orchestration {
 		Orchestration testHarness = new Orchestration();
 
 		//Method to parse the driver.txt file
-		BufferedReader driver = new BufferedReader(new FileReader(new File("driver.txt")));
-		String line = driver.readLine();
-		while(line != null) {
+		BufferedReader driver;
+		try {
+			driver = new BufferedReader(new FileReader(new File("driver.txt")));
+			String newLine;
+			try {
+				newLine = driver.readLine();
+				while(newLine != null) {
 
-			String action;
-			int pub_id;
-			int sub_id;
-			String event_type;
-			String event_header;
-			String event_payload;
-			String channel_name;
+					String action;
+					int pub_id;
+					int sub_id;
+					String event_type;
+					String event_header;
+					String event_payload;
+					String channel_name;
 
-			StringTokenizer st = new StringTokenizer(line);
-			String firstWord = st.nextToken();
+					StringTokenizer st = new StringTokenizer(newLine);
+					String firstWord = st.nextToken();
 
-			if (firstWord.equals("SUB")) {
-				action = "subscribe";
-				sub_id = Integer.parseInt(st.nextToken());
-				channel_name = st.nextToken();
-			}
-			else if(firstWord.equals("PUB")) {
-				action = "publish";
-				pub_id = Integer.parseInt(st.nextToken());
-				//if MORE parameters are provided
-				if(st.hasMoreTokens()) {
-					event_type = st.nextToken();
-					event_header = st.nextToken();
-					event_payload = st.nextToken();
+					if (firstWord.equals("SUB")) {
+						action = "subscribe";
+						sub_id = Integer.parseInt(st.nextToken());
+						channel_name = st.nextToken();
+					}
+					else if(firstWord.equals("PUB")) {
+						action = "publish";
+						pub_id = Integer.parseInt(st.nextToken());
+						//if MORE parameters are provided
+						if(st.hasMoreTokens()) {
+							event_type = st.nextToken();
+							event_header = st.nextToken();
+							event_payload = st.nextToken();
+						}
+					}
+					else if(firstWord.equals("BLOCK")) {
+						action = "block";
+						sub_id = Integer.parseInt(st.nextToken());
+						channel_name = st.nextToken();
+					}
+					else if(firstWord.equals("UNBLOCK")) {
+						action = "unblock";
+						sub_id = Integer.parseInt(st.nextToken());
+						channel_name = st.nextToken();
+					}
+					else {
+						System.out.println("Error reading driver.txt!");
+						break;
+					}
+					newLine = driver.readLine();
 				}
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 			}
-			else if(firstWord.equals("BLOCK")) {
-				action = "block";
-				sub_id = Integer.parseInt(st.nextToken());
-				channel_name = st.nextToken();
-			}
-			else if(firstWord.equals("UNBLOCK")) {
-				action = "unblock";
-				sub_id = Integer.parseInt(st.nextToken());
-				channel_name = st.nextToken();
-			}
-			else {
-				System.out.println("Error reading driver.txt!");
-				break;
-			}
-			line = driver.readLine();
+		} catch (FileNotFoundException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
 		}
 
 		try {
