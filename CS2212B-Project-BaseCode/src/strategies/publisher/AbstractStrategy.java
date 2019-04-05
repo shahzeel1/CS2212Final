@@ -19,7 +19,7 @@ public class AbstractStrategy {
 		this.event=event;
 	}
 	
-	public void doPublish() {};
+	public void doPublish(int publisherId) {};
 	
 	public void doPublish(AbstractEvent event, int publisherId) {};
 	
