@@ -53,7 +53,7 @@ public class ChannelPoolManager {
 		Channel ch = new Channel(channelName);
 		channelsMap.put(channelName, ch);
 		channelList.add(ch);
-		System.out.print("Channel " + channelName + " created"); //CHANGE x????!!!
+		System.out.println("Channel " + channelName + " created"); //CHANGE x????!!!
 		return ch;
 	}
 
