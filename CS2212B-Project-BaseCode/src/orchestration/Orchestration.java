@@ -37,7 +37,6 @@ public class Orchestration {
 			try {
 				newLine = driver.readLine();
 				while(newLine != null) {
-
 					String action;
 					int pub_id;
 					int sub_id;
@@ -53,6 +52,7 @@ public class Orchestration {
 						action = "subscribe";
 						sub_id = Integer.parseInt(st.nextToken());
 						channel_name = st.nextToken();
+						System.out.println(action + " parsed successfully. Id: " + sub_id + ". Channel name: " + channel_name);
 					}
 					else if(firstWord.equals("PUB")) {
 						action = "publish";
@@ -62,17 +62,25 @@ public class Orchestration {
 							event_type = st.nextToken();
 							event_header = st.nextToken();
 							event_payload = st.nextToken();
+							System.out.println(action + " parsed successfully. Id: " + pub_id + ". Event type: " + event_type + ". Event header: " + event_header + ". Event payload: " + event_payload);
 						}
+						else {
+							System.out.println(action + "2 parsed successfully. Id: " + pub_id);
+						}
+						
 					}
 					else if(firstWord.equals("BLOCK")) {
 						action = "block";
 						sub_id = Integer.parseInt(st.nextToken());
 						channel_name = st.nextToken();
+						System.out.println(action + " parsed successfully. Id: " + sub_id + ". Channel name: " + channel_name);
 					}
 					else if(firstWord.equals("UNBLOCK")) {
 						action = "unblock";
 						sub_id = Integer.parseInt(st.nextToken());
 						channel_name = st.nextToken();
+						System.out.println("Added Unblock function");
+						System.out.println(action + " parsed successfully. Id: " + sub_id + ". Channel name: " + channel_name);
 					}
 					else {
 						System.out.println("Error reading driver.txt!");
