@@ -29,17 +29,21 @@ public class SubscriberFactory {
 			case alpha : 
 				CSA = new ConcreteSubscriberA();
 				CSA.setState(stateName);
-				System.out.println("Subscriber " + subscriberType + " " + stateName + " created");
+				System.out.println("Subscriber with id " + CSA.getID() + " and type "+ subscriberType + " and state " + stateName + " created");
 				return CSA;
 			case beta:
 				CSA = new ConcreteSubscriberA();
 				CSA.setState(stateName);
+				System.out.println("Subscriber with id " + CSA.getID() + " and type "+ subscriberType + " and state " + stateName + " created");
 				return CSA;
 			case gamma:
 				CSA = new ConcreteSubscriberA();
+				System.out.println("Subscriber with id " + CSA.getID() + " and type "+ subscriberType + " and state " + stateName + " created");
 				CSA.setState(stateName);
 				return CSA;
-			default:
+			default: // what does the default case do????
+				CSA = new ConcreteSubscriberA();
+				System.out.println("Subscriber with id " + CSA.getID() + " and type "+ subscriberType + " and state " + stateName + " created");
 				return CSA;
 		}
 	}

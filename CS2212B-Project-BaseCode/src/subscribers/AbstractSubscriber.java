@@ -13,7 +13,6 @@ import states.subscriber.StateName;
  */
 public abstract class AbstractSubscriber implements IEntity {
 	
-	
 	protected IState state;
 
 	/**
@@ -21,6 +20,10 @@ public abstract class AbstractSubscriber implements IEntity {
 	 * @param stateName the entry from the {@link StateName} enumeration that we want the new IState of the ISubscriber to be 
 	 */
 	public void setState(StateName stateName) {};
+	
+	public int getID() {
+		return 0; //placeholder 0 to return
+	};
 
 	
 	/**

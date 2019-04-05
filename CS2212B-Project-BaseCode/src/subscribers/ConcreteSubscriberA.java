@@ -11,11 +11,17 @@ import states.subscriber.StateName;
  * @author kkontog, ktsiouni, mgrigori
  * an example concrete subscriber
  */
-class ConcreteSubscriberA extends AbstractSubscriber {
-
+class ConcreteSubscriberA extends AbstractSubscriber { 
 	
+	private static int subscriberID = 0;
+
 	protected ConcreteSubscriberA() {
+		subscriberID++;
 		state = StateFactory.createState(StateName.defaultState);
+	}
+	
+	public int getID() {
+		return subscriberID;
 	}
 	
 	/* (non-Javadoc)
