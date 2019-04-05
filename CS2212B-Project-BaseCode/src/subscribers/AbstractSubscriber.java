@@ -2,6 +2,9 @@ package subscribers;
 
 import baseEntities.IEntity;
 import events.AbstractEvent;
+import states.subscriber.AbstractState;
+import states.subscriber.StateFactory;
+import states.subscriber.StateName;
 /**
  * @author kkontog, ktsiouni, mgrigori
  * the base Interface for the Subscriber hierarchy
