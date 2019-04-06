@@ -222,16 +222,33 @@ public class Orchestration {
 			int[] StateConfigIntArray = new int[2];
 			for(int i = 0; i < StateConfigArray.length; i++)
 				StateConfigIntArray[i] = Integer.parseInt(StateConfigArray[i]);			
-			newSub = SubscriberFactory.createSubscriber(
-					SubscriberType.values()[StateConfigIntArray[0]], 
-					StateName.values()[StateConfigIntArray[1]],
-					StateConfigIntArray[0]);
-			listOfSubscribers.add(newSub);
+			
+			if(listOfSubscribers.isEmpty()) {
+				newSub = SubscriberFactory.createSubscriber(
+						SubscriberType.values()[StateConfigIntArray[0]], 
+						StateName.values()[StateConfigIntArray[1]],
+						StateConfigIntArray[0]);
+				listOfSubscribers.add(newSub);
+			}	else {				
+				boolean exists = false;
+				for(AbstractSubscriber sub: listOfSubscribers) {
+					if(sub.getID() == StateConfigIntArray[0]) {
+						sub.setState(StateName.values()[StateConfigIntArray[1]]);
+						exists = true;
+						break;
+					}
+				}
+				if(!exists) {
+					newSub = SubscriberFactory.createSubscriber(
+							SubscriberType.values()[StateConfigIntArray[0]], 
+							StateName.values()[StateConfigIntArray[1]],
+							StateConfigIntArray[0]);
+					listOfSubscribers.add(newSub);
+				}
+			}
 		}
 		StateBufferedReader.close();
 		return listOfSubscribers;
 	}
-
-
-
+	
 }
