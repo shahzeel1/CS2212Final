@@ -15,7 +15,7 @@ class ConcreteSubscriberA extends AbstractSubscriber {
 	
 	private int subscriberID = 0;
 
-	protected ConcreteSubscriberA() {
+	protected ConcreteSubscriberA() { // do we need to do an output here if the subscriber is created with a default states
 		state = StateFactory.createState(StateName.defaultState);
 	}
 	
@@ -32,6 +32,7 @@ class ConcreteSubscriberA extends AbstractSubscriber {
 	 */
 	public void setState(StateName stateName) {
 		state = StateFactory.createState(stateName);
+		System.out.println("Subscriber " + subscriberID + " is on state " + stateName);
 	}
 	
 	

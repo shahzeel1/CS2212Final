@@ -41,7 +41,7 @@ public class Orchestration {
 		try {
 			listOfPublishers = testHarness.createPublishers();
 			listOfSubscribers = testHarness.createSubscribers();
-
+		
 			List<AbstractChannel> channels = ChannelDiscovery.getInstance().listChannels();
 			//For demonstration purposes only
 			try {
@@ -202,11 +202,31 @@ public class Orchestration {
 			int[] PublisherConfigIntArray = new int[2];
 			for(int i = 0; i < PublisherConfigArray.length; i++)
 				PublisherConfigIntArray[i] = Integer.parseInt(PublisherConfigArray[i]);
-			newPub = PublisherFactory.createPublisher(
-					PublisherType.values()[PublisherConfigIntArray[0]],
-					StrategyName.values()[PublisherConfigIntArray[1]],
-					PublisherConfigIntArray[0]);
-			listOfPublishers.add(newPub);
+			
+			if(listOfPublishers.isEmpty()) {
+				newPub = PublisherFactory.createPublisher(
+						PublisherType.values()[PublisherConfigIntArray[0]],
+						StrategyName.values()[PublisherConfigIntArray[1]],
+						PublisherConfigIntArray[0]);
+				listOfPublishers.add(newPub);
+			} else {				
+				boolean exists = false;
+				for(AbstractPublisher pub: listOfPublishers) {
+					if(pub.getID() == PublisherConfigIntArray[0]) {
+						pub.setStrategy(StrategyName.values()[PublisherConfigIntArray[1]]);
+						exists = true;
+						break;
+					}
+				}
+				if(!exists) {
+					newPub = PublisherFactory.createPublisher(
+							PublisherType.values()[PublisherConfigIntArray[0]],
+							StrategyName.values()[PublisherConfigIntArray[1]],
+							PublisherConfigIntArray[0]);
+					listOfPublishers.add(newPub);
+				}
+			}
+			
 		}
 		StrategyBufferedReader.close();
 		return listOfPublishers;
@@ -229,7 +249,7 @@ public class Orchestration {
 						StateName.values()[StateConfigIntArray[1]],
 						StateConfigIntArray[0]);
 				listOfSubscribers.add(newSub);
-			}	else {				
+			} else {				
 				boolean exists = false;
 				for(AbstractSubscriber sub: listOfSubscribers) {
 					if(sub.getID() == StateConfigIntArray[0]) {

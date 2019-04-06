@@ -3,6 +3,7 @@ package publishers;
 import baseEntities.IEntity;
 import events.AbstractEvent;
 import strategies.publisher.IStrategy;
+import strategies.publisher.StrategyName;
 
 /**
  * @author kkontog, ktsiouni, mgrigori base Interface implemented by all
@@ -45,5 +46,7 @@ public abstract class AbstractPublisher implements IEntity {
 	public IStrategy getStrategy() {
 		return this.publishingStrategy;
 	};
+	
+	public void setStrategy(StrategyName strat) {};
 
 }

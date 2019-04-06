@@ -3,6 +3,8 @@ package publishers;
 import events.AbstractEvent;
 import strategies.publisher.IStrategy;
 import strategies.publisher.StrategyFactory;
+import strategies.publisher.StrategyName;
+
 
 
 /**
@@ -51,6 +53,12 @@ public class ConcretePublisher extends AbstractPublisher {
 	@Override
 	public IStrategy getStrategy() {
 		return this.publishingStrategy;
+	};
+	
+	public void setStrategy(StrategyName strat) {
+		this.publishingStrategy = StrategyFactory.createStrategy(strat);
+		System.out.println("Publisher " + pubID + " has strategy " + strat);
+
 	};
 
 }

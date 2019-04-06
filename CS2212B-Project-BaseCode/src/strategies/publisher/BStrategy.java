@@ -19,6 +19,7 @@ public class BStrategy implements IStrategy{
 		
 		// adding arbitrary channels to the channelList to post
 		listOfChannels.add("BStrategy NE1");
+		listOfChannels.add("cars");
 		
 		ChannelEventDispatcher channelDispatch = ChannelEventDispatcher.getInstance();
 		
@@ -39,6 +40,7 @@ public class BStrategy implements IStrategy{
 		// adding arbitrary channels to the channelList to post
 		listOfChannels.add("BStrategy E1");
 		listOfChannels.add("BStrategy E2");
+		listOfChannels.add("cars");
 				
 		System.out.println("Publisher " + publisherId + " publishes event " + event.getEventID());
 
