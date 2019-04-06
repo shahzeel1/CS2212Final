@@ -121,6 +121,10 @@ public class Orchestration {
 						}
 					}
 					else if(firstWord.equals("PUB")) {
+						
+						// publisher with ID 0 publishes event with type TypeA and with 
+						// header h1 and payload p1
+
 						action = "publish";
 						pub_id = Integer.parseInt(st.nextToken());
 						//if MORE parameters are provided

@@ -30,26 +30,31 @@ public class PublisherFactory {
 				ip = new ConcretePublisher(StrategyFactory.createStrategy(strategyName));
 				ip.setID(id);
 				System.out.println("Publisher " + ip.getID() + " created");
+				System.out.println("Publisher " + ip.getID() + " has strategy " + strategyName);
 				return ip;
 			case betaPub : 
 				ip = new ConcretePublisher(StrategyFactory.createStrategy(strategyName));
 				ip.setID(id);
 				System.out.println("Publisher " + ip.getID() + " created");
+				System.out.println("Publisher " + ip.getID() + " has strategy " + strategyName);
 				return ip;
 			case gammaPub : 
 				ip = new ConcretePublisher(StrategyFactory.createStrategy(strategyName));
 				ip.setID(id);
 				System.out.println("Publisher " + ip.getID() + " created");
+				System.out.println("Publisher " + ip.getID() + " has strategy " + strategyName);
 				return ip;
 			case deltaPub : 
 				ip = new ConcretePublisher(StrategyFactory.createStrategy(strategyName));
 				ip.setID(id);
 				System.out.println("Publisher " + ip.getID() + " created");
+				System.out.println("Publisher " + ip.getID() + " has strategy " + strategyName);
 				return ip;
 			default:
 				ip = new ConcretePublisher(StrategyFactory.createStrategy(strategyName));
 				ip.setID(id);
 				System.out.println("Publisher " + ip.getID() + " created");
+				System.out.println("Publisher " + ip.getID() + " has strategy " + strategyName);
 				return ip;
 		}
 	}
@@ -60,6 +65,7 @@ public class PublisherFactory {
 		ip = new ConcretePublisher(StrategyFactory.createStrategy(StrategyName.values()[2]));
 		ip.setID(id);
 		System.out.println("Publisher " + ip.getID() + " created");
+		System.out.println("Publisher " + ip.getID() + " has strategy " + StrategyName.values()[2]);
 		return ip;
 	}
 	
