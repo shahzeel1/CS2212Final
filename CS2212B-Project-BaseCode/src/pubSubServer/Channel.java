@@ -31,7 +31,6 @@ class Channel extends AbstractChannel {
 	protected void publishEvent(AbstractEvent event) {
 		events.add(event);
 		notifySubscribers(event);
-
 	}
 
 	

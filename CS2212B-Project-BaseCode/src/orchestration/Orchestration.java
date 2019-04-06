@@ -147,8 +147,8 @@ public class Orchestration {
 									break;
 								 }
 							}
-							
 						}
+						
 						else {
 							// Creation of a publisher
 							

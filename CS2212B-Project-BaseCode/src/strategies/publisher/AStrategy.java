@@ -24,7 +24,7 @@ public class AStrategy implements IStrategy{
 		ChannelEventDispatcher channelDispatch = ChannelEventDispatcher.getInstance();
 		
 		// random message
-		EventMessage message = new EventMessage("default", "message");
+		EventMessage message = new EventMessage("default A", "message");
 		
 		AbstractEvent event = EventFactory.createEvent(EventType.values()[0], publisherId, message);
 		

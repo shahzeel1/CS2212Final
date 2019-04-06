@@ -1,5 +1,7 @@
 PUB 0
 SUB 0 cars   		
 SUB 4 planes
-PUB 0 TypeA h1 p1		
+PUB 0 TypeA h1 p1
+PUB 1 TypeB h2 p2	
+PUB 3 TypeC h3 p3		
 BLOCK 0 cars			
