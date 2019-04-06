@@ -16,6 +16,8 @@ public interface IState {
 	 * @param event
 	 * @param channelName
 	 */
-	public void handleEvent(AbstractEvent event, String channelName);
+	public void handleEvent(AbstractEvent event, String channelName, int subID);
+	
+	public String getState();
 	
 }

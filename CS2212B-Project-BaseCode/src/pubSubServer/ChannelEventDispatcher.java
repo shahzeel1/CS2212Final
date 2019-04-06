@@ -41,9 +41,10 @@ public class ChannelEventDispatcher {
 				channel = ChannelCreator.getInstance().addChannel(channelName);
 			}
 			
+			System.out.println("Channel " + channel.getChannelTopic() + " has event " + event.getEventID() + " from publisher " + event.getPubID());
+	
 			channel.publishEvent(event);
 			
-			System.out.println("Channel " + channel.getChannelTopic() + " has event " + event.getEventID() + " from publisher " + event.getPubID());
 		}
 	}
 	

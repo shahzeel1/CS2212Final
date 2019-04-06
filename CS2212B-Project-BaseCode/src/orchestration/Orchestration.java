@@ -15,6 +15,7 @@ import events.EventFactory;
 import events.EventMessage;
 import events.EventType;
 import pubSubServer.AbstractChannel;
+import pubSubServer.AdministrationServer;
 import pubSubServer.ChannelAccessControl;
 import pubSubServer.ChannelDiscovery;
 import pubSubServer.ChannelEventDispatcher;
@@ -162,22 +163,16 @@ public class Orchestration {
 						sub_id = Integer.parseInt(st.nextToken());
 						channel_name = st.nextToken();
 						
-						ChannelAccessControl channelManager = ChannelAccessControl.getInstance();
-						Iterator<AbstractSubscriber> it = listOfSubscribers.iterator();
-						AbstractSubscriber sub;
-		
-						while(it.hasNext()) {
-							 sub = it.next();
-							 if(sub.getID() == sub_id) {
-								channelManager.blockSubscriber(sub, channel_name);
-								break;
-							 }
-						}
+						AdministrationServer adminServer = new AdministrationServer();
+						adminServer.block(sub_id, channel_name, listOfSubscribers);
 					}
 					else if(firstWord.equals("UNBLOCK")) {
 						action = "unblock";
 						sub_id = Integer.parseInt(st.nextToken());
 						channel_name = st.nextToken();
+						
+						AdministrationServer adminServer = new AdministrationServer();
+						adminServer.unBlock(sub_id, channel_name, listOfSubscribers);
 					}
 					else {
 						System.out.println("Error reading driver.txt!");

@@ -95,5 +95,5 @@ public class ChannelPoolManager {
 	protected Map<String, AbstractChannel> getChannelsMap() {
 		return channelsMap;
 	}
-	
+		
 }

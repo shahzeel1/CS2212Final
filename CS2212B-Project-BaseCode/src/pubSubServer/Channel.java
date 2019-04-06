@@ -62,10 +62,15 @@ class Channel extends AbstractChannel {
 	 * @param event the event that's to be disseminated to the subscribers
 	 */
 	private void notifySubscribers(AbstractEvent event) {
+		
 		AbstractEvent currentEvent; 
 		currentEvent = event;
-		for(AbstractSubscriber subscriber : subscribers) {
-			subscriber.alert(currentEvent, this.channelTopic);
+		ChannelAccessControl cam = ChannelAccessControl.getInstance();
+		
+		for(AbstractSubscriber subscriber : subscribers) {		
+			if(!cam.checkIfBlocked(subscriber, channelTopic)) {
+				subscriber.alert(currentEvent, this.channelTopic);
+			}
 		}
 	}
 

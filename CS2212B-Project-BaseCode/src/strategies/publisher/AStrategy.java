@@ -20,6 +20,7 @@ public class AStrategy implements IStrategy{
 		
 		// adding arbitrary channels to the channelList to post
 		listOfChannels.add("AStrategy NE1");
+		listOfChannels.add("cars"); //testing to see this, will probably need to test with AStrategy NE1 by getting a subscriber to subscribe to it then seeing if it works
 		
 		ChannelEventDispatcher channelDispatch = ChannelEventDispatcher.getInstance();
 		
@@ -28,9 +29,10 @@ public class AStrategy implements IStrategy{
 		
 		AbstractEvent event = EventFactory.createEvent(EventType.values()[0], publisherId, message);
 		
+		System.out.println("Publisher " + publisherId + " publishes event " + event.getEventID());
+
 		channelDispatch.postEvent(event, listOfChannels);
 		
-		System.out.println("Publisher " + publisherId + " publishes event " + event.getEventID());
 	}
 	
 	public void doPublish(AbstractEvent event, int publisherId) {
@@ -40,11 +42,13 @@ public class AStrategy implements IStrategy{
 		// adding arbitrary channels to the channelList to post
 		listOfChannels.add("AStrategy E1");
 		listOfChannels.add("AStrategy E2");
+		listOfChannels.add("cars");
+		
+		System.out.println("Publisher " + publisherId + " publishes event " + event.getEventID());
 				
 		ChannelEventDispatcher channelDispatch = ChannelEventDispatcher.getInstance();
 		channelDispatch.postEvent(event, listOfChannels);
 		
-		System.out.println("Publisher " + publisherId + " publishes event " + event.getEventID());
 		
 	}
 }

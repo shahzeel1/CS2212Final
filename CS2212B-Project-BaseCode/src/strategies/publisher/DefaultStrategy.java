@@ -26,9 +26,9 @@ public class DefaultStrategy implements IStrategy{
 		
 		AbstractEvent event = EventFactory.createEvent(EventType.values()[0], publisherId, message);
 		
-		channelDispatch.postEvent(event, listOfChannels);
-		
 		System.out.println("Publisher " + publisherId + " publishes event " + event.getEventID());
+
+		channelDispatch.postEvent(event, listOfChannels);
 		
 	}
 	
@@ -39,11 +39,11 @@ public class DefaultStrategy implements IStrategy{
 		// adding arbitrary channels to the channelList to post
 		listOfChannels.add("DefaultStrategy E1");
 		listOfChannels.add("DefaultStrategy E2");
+		
+		System.out.println("Publisher " + publisherId + " publishes event " + event.getEventID());
 				
 		ChannelEventDispatcher channelDispatch = ChannelEventDispatcher.getInstance();
 		channelDispatch.postEvent(event, listOfChannels);
-		
-		System.out.println("Publisher " + publisherId + " publishes event " + event.getEventID());
-		
+				
 	}
 }
