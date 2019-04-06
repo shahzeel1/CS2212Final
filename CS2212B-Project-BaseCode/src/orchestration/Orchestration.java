@@ -154,12 +154,16 @@ public class Orchestration {
 								pub = pubItr.next();
 								 if(pub.getID() == pub_id) {
 									IStrategy strategy = pub.getStrategy();
+									
+									//Publish the event using the strategy
+									strategy.doPublish(event, pub_id);
 									break;
 								 }
 							}
+							
 							//WE NEED TO FIGURE OUT WHICH CHANNELS TO POST TO BASED ON THE PUB STRATEGY
 							//Publish
-							ChannelEventDispatcher channelDispatch = ChannelEventDispatcher.getInstance();
+							//ChannelEventDispatcher channelDispatch = ChannelEventDispatcher.getInstance();
 							//channelDispatch.postEvent(event, listOfChannels);
 						}
 						else {
