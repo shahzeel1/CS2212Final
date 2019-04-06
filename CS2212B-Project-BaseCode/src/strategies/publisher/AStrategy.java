@@ -15,13 +15,11 @@ import publishers.AbstractPublisher;
 public class AStrategy implements IStrategy{
 
 	public void doPublish(int publisherId) {
-		//String[] array = {"testing", "out"};
 		
 		List<String> listOfChannels = new ArrayList<>();
 		
 		// adding arbitrary channels to the channelList to post
-		listOfChannels.add("default");
-		listOfChannels.add("test");
+		listOfChannels.add("AStrategy NE1");
 		
 		ChannelEventDispatcher channelDispatch = ChannelEventDispatcher.getInstance();
 		
@@ -32,7 +30,7 @@ public class AStrategy implements IStrategy{
 		
 		channelDispatch.postEvent(event, listOfChannels);
 		
-		System.out.println("Publisher " + publisherId + " publishes event " + event);
+		System.out.println("Publisher " + publisherId + " publishes event " + event.getEventID());
 	}
 	
 	public void doPublish(AbstractEvent event, int publisherId) {
@@ -40,13 +38,13 @@ public class AStrategy implements IStrategy{
 		List<String> listOfChannels = new ArrayList<>();
 				
 		// adding arbitrary channels to the channelList to post
-		listOfChannels.add("default");
-		listOfChannels.add("test");
+		listOfChannels.add("AStrategy E1");
+		listOfChannels.add("AStrategy E2");
 				
 		ChannelEventDispatcher channelDispatch = ChannelEventDispatcher.getInstance();
 		channelDispatch.postEvent(event, listOfChannels);
 		
-		System.out.println("Publisher " + publisherId + " publishes event " + event);
+		System.out.println("Publisher " + publisherId + " publishes event " + event.getEventID());
 		
 	}
 }

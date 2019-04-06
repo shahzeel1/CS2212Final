@@ -42,6 +42,8 @@ public class ChannelEventDispatcher {
 			}
 			
 			channel.publishEvent(event);
+			
+			System.out.println("Channel " + channel.getChannelTopic() + " has event " + event.getEventID() + " from publisher " + event.getPubID());
 		}
 	}
 	

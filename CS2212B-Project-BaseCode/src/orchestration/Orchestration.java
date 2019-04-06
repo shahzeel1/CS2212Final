@@ -155,8 +155,10 @@ public class Orchestration {
 								 if(pub.getID() == pub_id) {
 									IStrategy strategy = pub.getStrategy();
 									
+									pub.publish(event);
+									
 									//Publish the event using the strategy
-									strategy.doPublish(event, pub_id);
+									//strategy.doPublish(event, pub_id);
 									break;
 								 }
 							}

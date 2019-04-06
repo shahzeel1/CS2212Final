@@ -37,7 +37,7 @@ public class ConcretePublisher extends AbstractPublisher {
 	 */
 	@Override
 	public void publish(AbstractEvent event) {
-		publishingStrategy.doPublish(event, this.hashCode());
+		publishingStrategy.doPublish(event, this.pubID); // changed this.hashCode() to this.pubID
 	}
 
 	/* (non-Javadoc)
@@ -45,7 +45,7 @@ public class ConcretePublisher extends AbstractPublisher {
 	 */
 	@Override
 	public void publish() {
-		publishingStrategy.doPublish(this.hashCode());
+		publishingStrategy.doPublish(this.pubID);
 	}
 	
 	@Override
