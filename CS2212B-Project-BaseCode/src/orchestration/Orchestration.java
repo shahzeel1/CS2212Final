@@ -39,13 +39,6 @@ public class Orchestration {
 		try {
 			listOfPublishers = testHarness.createPublishers();
 			listOfSubscribers = testHarness.createSubscribers();
-//			
-//			Iterator<AbstractSubscriber> it = listOfSubscribers.iterator();
-//			AbstractSubscriber sub;
-//			while(it.hasNext()) {
-//				 sub = it.next();
-//				System.out.println(sub.getID());
-//			}
 
 			List<AbstractChannel> channels = ChannelDiscovery.getInstance().listChannels();
 			//For demonstration purposes only
@@ -113,7 +106,6 @@ public class Orchestration {
 						
 						while(it.hasNext()) {
 							 sub = it.next();
-							 //System.out.println(sub);
 							 if(sub.getID() == sub_id) {
 								subManager.subscribe(channel_name, sub);
 								break;
@@ -121,9 +113,6 @@ public class Orchestration {
 						}
 					}
 					else if(firstWord.equals("PUB")) {
-						
-						// publisher with ID 0 publishes event with type TypeA and with 
-						// header h1 and payload p1
 
 						action = "publish";
 						pub_id = Integer.parseInt(st.nextToken());
@@ -153,20 +142,12 @@ public class Orchestration {
 							while(pubItr.hasNext()) {
 								pub = pubItr.next();
 								 if(pub.getID() == pub_id) {
-									IStrategy strategy = pub.getStrategy();
 									
 									pub.publish(event);
-									
-									//Publish the event using the strategy
-									//strategy.doPublish(event, pub_id);
 									break;
 								 }
 							}
 							
-							//WE NEED TO FIGURE OUT WHICH CHANNELS TO POST TO BASED ON THE PUB STRATEGY
-							//Publish
-							//ChannelEventDispatcher channelDispatch = ChannelEventDispatcher.getInstance();
-							//channelDispatch.postEvent(event, listOfChannels);
 						}
 						else {
 							// Creation of a publisher
