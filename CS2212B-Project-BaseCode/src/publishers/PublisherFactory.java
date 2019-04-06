@@ -54,4 +54,13 @@ public class PublisherFactory {
 		}
 	}
 	
+	// createPublisher when only id is given
+	public static AbstractPublisher createPublisher(int id) {
+		AbstractPublisher ip;
+		ip = new ConcretePublisher(StrategyFactory.createStrategy(StrategyName.values()[2]));
+		ip.setID(id);
+		System.out.println("Publisher " + ip.getID() + " created");
+		return ip;
+	}
+	
 }

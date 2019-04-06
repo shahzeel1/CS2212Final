@@ -159,7 +159,10 @@ public class Orchestration {
 							//channelDispatch.postEvent(event, listOfChannels);
 						}
 						else {
-							//Letitia put your code here
+							// Creation of a publisher
+							
+							AbstractPublisher publisher = PublisherFactory.createPublisher(pub_id);
+							listOfPublishers.add(publisher);
 						}
 					}
 					else if(firstWord.equals("BLOCK")) {
