@@ -23,23 +23,33 @@ public class PublisherFactory {
 	 * @param strategyName an entry from the {@link StrategyName} enumeration
 	 * @return an instance of the specified IPublisher implementation with the specified strategyName attached to it
 	 */
-	public static AbstractPublisher createPublisher(PublisherType publisherType, StrategyName strategyName) {
+	public static AbstractPublisher createPublisher(PublisherType publisherType, StrategyName strategyName, int id) {
 		AbstractPublisher ip;
 		switch (publisherType) {
 			case alphaPub : 
 				ip = new ConcretePublisher(StrategyFactory.createStrategy(strategyName));
+				ip.setID(id);
+				System.out.println("Publisher " + ip.getID() + " created");
 				return ip;
 			case betaPub : 
 				ip = new ConcretePublisher(StrategyFactory.createStrategy(strategyName));
+				ip.setID(id);
+				System.out.println("Publisher " + ip.getID() + " created");
 				return ip;
 			case gammaPub : 
 				ip = new ConcretePublisher(StrategyFactory.createStrategy(strategyName));
+				ip.setID(id);
+				System.out.println("Publisher " + ip.getID() + " created");
 				return ip;
 			case deltaPub : 
 				ip = new ConcretePublisher(StrategyFactory.createStrategy(strategyName));
+				ip.setID(id);
+				System.out.println("Publisher " + ip.getID() + " created");
 				return ip;
 			default:
 				ip = new ConcretePublisher(StrategyFactory.createStrategy(strategyName));
+				ip.setID(id);
+				System.out.println("Publisher " + ip.getID() + " created");
 				return ip;
 		}
 	}

@@ -202,7 +202,8 @@ public class Orchestration {
 				PublisherConfigIntArray[i] = Integer.parseInt(PublisherConfigArray[i]);
 			newPub = PublisherFactory.createPublisher(
 					PublisherType.values()[PublisherConfigIntArray[0]],
-					StrategyName.values()[PublisherConfigIntArray[1]]);
+					StrategyName.values()[PublisherConfigIntArray[1]],
+					PublisherConfigIntArray[0]);
 			listOfPublishers.add(newPub);
 		}
 		StrategyBufferedReader.close();

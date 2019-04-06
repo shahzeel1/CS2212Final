@@ -14,9 +14,7 @@ import strategies.publisher.StrategyFactory;
  */
 public class ConcretePublisher extends AbstractPublisher {
 
-	
-	
-	
+	private int pubID;
 	
 	/**
 	 * @param concreteStrategy attaches a concreteStrategy generated from the {@link StrategyFactory#createStrategy(strategies.publisher.StrategyName)}
@@ -24,6 +22,14 @@ public class ConcretePublisher extends AbstractPublisher {
 	 */
 	protected ConcretePublisher(IStrategy concreteStrategy) {
 		this.publishingStrategy = concreteStrategy;
+	}
+	
+	public void setID(int id) {
+		 pubID = id;
+	}
+	
+	public int getID() {
+		return pubID;
 	}
 
 	/* (non-Javadoc)
