@@ -26,10 +26,18 @@ public class ConcretePublisher extends AbstractPublisher {
 		this.publishingStrategy = concreteStrategy;
 	}
 	
+	/**
+	 * @param Publisher id
+	 */
+	@Override
 	public void setID(int id) {
 		 pubID = id;
 	}
 	
+	/**
+	 * @return publisher ID 
+	 */
+	@Override
 	public int getID() {
 		return pubID;
 	}

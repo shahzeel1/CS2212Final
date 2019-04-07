@@ -23,10 +23,15 @@ public abstract class AbstractEvent {
 		this.payload = payload;
 	}
 	
+	/** 
+	 * @return publisherId
+	 */
 	public int getPubID() {
 		return eventPublisherId;
 	}
-	
+	/**
+	 * @return eventID
+	 */
 	public long getEventID() {
 		return eventId;
 	}

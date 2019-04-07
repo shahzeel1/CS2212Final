@@ -22,6 +22,7 @@ public class EventFactory {
 	 */
 	public static AbstractEvent createEvent(EventType eventType, int eventPublisherId, EventMessage payload) {
 		EventIDMaker id = new EventIDMaker();
+		// Use the Type given to create the appropriate event type
 		switch(eventType) {
 		case TypeA : 
 			return new EventTypeA(id.getNewEventID(),eventPublisherId,payload);

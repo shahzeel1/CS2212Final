@@ -29,6 +29,7 @@ public class PublisherFactory {
 		case alphaPub : 
 			ip = new ConcretePublisher(StrategyFactory.createStrategy(strategyName));
 			ip.setID(id);
+			//print info onto the console 
 			printOutput(id,strategyName);
 			return ip;
 		case betaPub : 
@@ -62,7 +63,7 @@ public class PublisherFactory {
 		printOutput(id,StrategyName.values()[2]);
 		return ip;
 	}
-
+// output function 
 	private static void printOutput(int id,StrategyName strategyName)
 	{
 		System.out.println("Publisher " + id + " created");
