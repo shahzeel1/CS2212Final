@@ -12,20 +12,24 @@ public class ChannelCreator {
 	private ChannelPoolManager cpm = null;
 	private static ChannelCreator instance = null; // added this
 	
-	private ChannelCreator() { //added this constructor
-		// what do I do here?
-		// keeping the same map
-		// keep a map between the name and the 9bhect that's been created
-		// addChannel
+	/**
+	 * Constructor creates Channel Pool Manager 
+	 */
+	private ChannelCreator() { 
 		//CREATE A CHANNEL HERE
 		cpm = ChannelPoolManager.getInstance();		
 	}
 	
+	/**
+	 * 
+	 * @return instance 
+	 */
 	protected static ChannelCreator getInstance() {
-		if (instance == null) { // are you supposed to put the check if instance is null here?
+		
+		if (instance == null) { 
 			instance = new ChannelCreator();
 		}
-		return instance; // only this line was originally in this method
+		return instance; 
 	}
 	
 	/**

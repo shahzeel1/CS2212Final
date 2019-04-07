@@ -23,6 +23,9 @@ public class ChannelPoolManager {
 	private Map<String, AbstractChannel> channelsMap = new HashMap<String, AbstractChannel>();
 	private List<AbstractChannel> channelList = new ArrayList<AbstractChannel>();
 
+	/**
+	 * Constructor Creates the channel
+	 */
 	private ChannelPoolManager() {
 		try {
 		BufferedReader channelListReader = new BufferedReader(new FileReader(new File("Channels.chl")));
@@ -35,6 +38,10 @@ public class ChannelPoolManager {
 		}
 	}
 
+	/**
+	 * 
+	 * @return instance
+	 */
 	protected static ChannelPoolManager getInstance() {
 
 		if (instance == null)

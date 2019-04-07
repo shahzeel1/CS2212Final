@@ -14,17 +14,24 @@ import publishers.AbstractPublisher;
 public class ChannelEventDispatcher {
 
 	private ChannelPoolManager cpManager;
-	private static ChannelEventDispatcher instance = null; // added this line here
+	private static ChannelEventDispatcher instance = null; 
 	
-	private ChannelEventDispatcher() { // added this here
+	/**
+	 * Constructor to create Channel Pool Manager
+	 */
+	private ChannelEventDispatcher() {
 		cpManager = ChannelPoolManager.getInstance();
 	}
 	
+	/**
+	 * 
+	 * @return instance
+	 */
 	public static ChannelEventDispatcher getInstance() {
 		if(instance == null) {
-			instance = new ChannelEventDispatcher();
+			instance = new ChannelEventDispatcher();// initialize if not already created
 		}
-		return instance; // originally only this was here ??
+		return instance; 
 	}
 
 	
@@ -35,12 +42,14 @@ public class ChannelEventDispatcher {
 	 */
 	public void postEvent(AbstractEvent event, List<String> listOfChannels) {
 		
+		// Find the channel and post the event to that channel
 		for(String channelName : listOfChannels) {
 			AbstractChannel channel = cpManager.findChannel(channelName);
 			if(channel == null) {
 				channel = ChannelCreator.getInstance().addChannel(channelName);
 			}
 			
+			// print confirmation to console
 			System.out.println("Channel " + channel.getChannelTopic() + " has event " + event.getEventID() + " from publisher " + event.getPubID());
 	
 			channel.publishEvent(event);

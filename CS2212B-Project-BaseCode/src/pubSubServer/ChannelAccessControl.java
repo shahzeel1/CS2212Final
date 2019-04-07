@@ -18,12 +18,15 @@ import subscribers.AbstractSubscriber;
  */
 public class ChannelAccessControl {
 	
-	private static ChannelAccessControl instance = null; // added this
+	private static ChannelAccessControl instance = null; // declare the instance variable
 	
-	private ChannelAccessControl() { // added this
-		// what do I do here?
+	private ChannelAccessControl() { 
 	}
 	
+	/**
+	 * 
+	 * @return instance
+	 */
 	protected static ChannelAccessControl getInstance() {
 		if (instance == null ) {
 			instance = new ChannelAccessControl();

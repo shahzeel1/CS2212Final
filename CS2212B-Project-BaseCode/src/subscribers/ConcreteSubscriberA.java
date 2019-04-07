@@ -15,7 +15,7 @@ class ConcreteSubscriberA extends AbstractSubscriber {
 	
 	private int subscriberID = 0;
 
-	protected ConcreteSubscriberA() { // do we need to do an output here if the subscriber is created with a default states
+	protected ConcreteSubscriberA() { 
 		state = StateFactory.createState(StateName.defaultState);
 	}
 	
