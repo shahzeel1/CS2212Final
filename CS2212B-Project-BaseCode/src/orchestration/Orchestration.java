@@ -33,14 +33,16 @@ import subscribers.SubscriberType;
 public class Orchestration {
 
 	public static void main(String[] args) {
-
+		//Instantiate lists to store publishers and subscribers
 		List<AbstractPublisher> listOfPublishers = new ArrayList<>();
 		List<AbstractSubscriber> listOfSubscribers = new ArrayList<>();
 		Orchestration testHarness = new Orchestration();
 
 		try {
+			//Generate a list of publishers
 			listOfPublishers = testHarness.createPublishers();
 			System.out.println("");
+			//Generate a list of subscribers
 			listOfSubscribers = testHarness.createSubscribers();
 			System.out.println("");
 
@@ -83,7 +85,7 @@ public class Orchestration {
 
 		}
 
-		//Method to parse the driver.txt file
+		//Parsing the driver.txt file
 		BufferedReader driver;
 		try {
 			driver = new BufferedReader(new FileReader(new File("driver.txt")));
@@ -91,8 +93,7 @@ public class Orchestration {
 			try {
 				newLine = driver.readLine();
 				while(newLine != null) {
-
-					String action;
+					//Variables for various driver.txt inputs
 					int pub_id;
 					int sub_id;
 					String event_type;
@@ -102,10 +103,9 @@ public class Orchestration {
 
 					StringTokenizer st = new StringTokenizer(newLine);
 					String firstWord = st.nextToken();
-
+					//For subscribing to a channel
 					if (firstWord.equals("SUB")) {
 						System.out.println("");
-						action = "subscribe";
 						sub_id = Integer.parseInt(st.nextToken());
 						channel_name = st.nextToken();
 
@@ -113,24 +113,26 @@ public class Orchestration {
 
 						Iterator<AbstractSubscriber> it = listOfSubscribers.iterator();
 						AbstractSubscriber sub;
-
+						//Find the subscriber from the subscribers list
 						while(it.hasNext()) {
 							sub = it.next();
 							if(sub.getID() == sub_id) {
+								//Subscribe to the channel
 								subManager.subscribe(channel_name, sub);
 								break;
 							}
 						}
 					}
+					//For publishing an event
 					else if(firstWord.equals("PUB")) {
 						System.out.println("");
-						action = "publish";
 						pub_id = Integer.parseInt(st.nextToken());
-						//if MORE parameters are provided
+						//If event type, event header, and event payload parameters are provided
 						if(st.hasMoreTokens()) {
 							event_type = st.nextToken();
 							event_header = st.nextToken();
 							event_payload = st.nextToken();
+							
 							//Create the event
 							EventMessage msg = new EventMessage(event_header, event_payload);
 							EventType type;
@@ -143,22 +145,19 @@ public class Orchestration {
 
 							AbstractEvent event = EventFactory.createEvent(type, pub_id, msg);
 
-							//Find the publisher
-
+							//Find the publisher from the publisher list
 							Iterator<AbstractPublisher> pubItr = listOfPublishers.iterator();
 							AbstractPublisher pub;
-
 							boolean exists = false;
 							while(pubItr.hasNext()) {
 								pub = pubItr.next();
 								if(pub.getID() == pub_id) {
-
 									pub.publish(event);
 									exists = true;
 									break;
 								}
-
 							}
+							//Create publisher if they couldn't be found in the list
 							if(!exists)
 							{
 								pub = PublisherFactory.createPublisher(pub_id);
@@ -166,11 +165,9 @@ public class Orchestration {
 								pub.publish(event);
 							}
 						}
-
+						//Only the publisher ID parameter was given, so we just create the publisher if they don't exist already
 						else {
-							// Creation of a publisher
-							//Find the publisher
-
+							//Try finding the publisher
 							Iterator<AbstractPublisher> pubItr = listOfPublishers.iterator();
 							AbstractPublisher pub;
 
@@ -184,6 +181,7 @@ public class Orchestration {
 									break;
 								}
 							}
+							//Create publisher if they couldn't be found in the list
 							if(!exists)
 							{
 								pub = PublisherFactory.createPublisher(pub_id);
@@ -191,44 +189,46 @@ public class Orchestration {
 							}
 						}
 					}
-
+					//For blocking a subscriber from a channel
 					else if(firstWord.equals("BLOCK")) {
 						System.out.println("");
-						action = "block";
 						sub_id = Integer.parseInt(st.nextToken());
 						channel_name = st.nextToken();
-
+						
+						//Block the subscriber using the AdministrationServer
 						AdministrationServer adminServer = new AdministrationServer();
 						adminServer.block(sub_id, channel_name, listOfSubscribers);
 					}
+					//For unblocking a subscriber from a channel
 					else if(firstWord.equals("UNBLOCK")) {
 						System.out.println("");
-						action = "unblock";
 						sub_id = Integer.parseInt(st.nextToken());
 						channel_name = st.nextToken();
 
+						//Unblock the subscriber using the AdministrationServer
 						AdministrationServer adminServer = new AdministrationServer();
 						adminServer.unBlock(sub_id, channel_name, listOfSubscribers);
 					}
+					//If the first word isn't any of the actions, there is an error
 					else {
 						System.out.println("Error reading driver.txt!");
 						break;
 					}
+					//Read the next line in the text file
 					newLine = driver.readLine();
 				}
+				//Close upon reading the entire line
 				driver.close();
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		} catch (FileNotFoundException e1) {
-			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
 	}
 
-
 	private List<AbstractPublisher> createPublishers() throws IOException{
+		//Initiate a list to store the publishers
 		List<AbstractPublisher> listOfPublishers = new ArrayList<>();
 		AbstractPublisher newPub;
 		BufferedReader StrategyBufferedReader = new BufferedReader(new FileReader(new File("Strategies.str")));
