@@ -37,12 +37,15 @@ public class Orchestration {
 		List<AbstractPublisher> listOfPublishers = new ArrayList<>();
 		List<AbstractSubscriber> listOfSubscribers = new ArrayList<>();
 		Orchestration testHarness = new Orchestration();
-		
+
 		try {
 			listOfPublishers = testHarness.createPublishers();
+			System.out.println("");
 			listOfSubscribers = testHarness.createSubscribers();
-		
+			System.out.println("");
+
 			List<AbstractChannel> channels = ChannelDiscovery.getInstance().listChannels();
+			System.out.println("");
 			//For demonstration purposes only
 			try {
 				BufferedReader initialChannels = new BufferedReader(new FileReader(new File("Channels.chl")));
@@ -55,6 +58,7 @@ public class Orchestration {
 					subscriber.subscribe(channelList.get(subscriberIndex%channelList.size()));
 					subscriberIndex++;
 				}
+				System.out.println("");
 				initialChannels.close();
 			}catch(IOException ioe) {
 				System.out.println("Loading Channels from file failed proceeding with random selection");
@@ -65,6 +69,7 @@ public class Orchestration {
 			}
 			for(AbstractPublisher publisher : listOfPublishers) {
 				publisher.publish();
+				System.out.println("");
 			}
 
 		} catch (IOException ioe) {
@@ -74,6 +79,8 @@ public class Orchestration {
 		}
 		for(AbstractPublisher publisher : listOfPublishers) {
 			publisher.publish();
+			System.out.println("");
+
 		}
 		
 		//Method to parse the driver.txt file
@@ -100,22 +107,22 @@ public class Orchestration {
 						action = "subscribe";
 						sub_id = Integer.parseInt(st.nextToken());
 						channel_name = st.nextToken();
-												
+
 						SubscriptionManager subManager = SubscriptionManager.getInstance();
-						
+
 						Iterator<AbstractSubscriber> it = listOfSubscribers.iterator();
 						AbstractSubscriber sub;
-						
+
 						while(it.hasNext()) {
-							 sub = it.next();
-							 if(sub.getID() == sub_id) {
+							sub = it.next();
+							if(sub.getID() == sub_id) {
 								subManager.subscribe(channel_name, sub);
 								break;
-							 }
+							}
 						}
 					}
 					else if(firstWord.equals("PUB")) {
-
+						System.out.println("");
 						action = "publish";
 						pub_id = Integer.parseInt(st.nextToken());
 						//if MORE parameters are provided
@@ -127,33 +134,33 @@ public class Orchestration {
 							EventMessage msg = new EventMessage(event_header, event_payload);
 							EventType type;
 							switch(event_type) {
-								case "TypeA": 
-									type = EventType.values()[2];
-								case "TypeB": 
-									type = EventType.values()[1];
-								default: 
-									type = EventType.values()[0];
+							case "TypeA": 
+								type = EventType.values()[2];
+							case "TypeB": 
+								type = EventType.values()[1];
+							default: 
+								type = EventType.values()[0];
 							}
 							AbstractEvent event = EventFactory.createEvent(type, pub_id, msg);
-							
+
 							//Find the publisher
-							
+
 							Iterator<AbstractPublisher> pubItr = listOfPublishers.iterator();
 							AbstractPublisher pub;
-							
+
 							while(pubItr.hasNext()) {
 								pub = pubItr.next();
-								 if(pub.getID() == pub_id) {
-									
+								if(pub.getID() == pub_id) {
+
 									pub.publish(event);
 									break;
-								 }
+								}
 							}
 						}
-						
+
 						else {
 							// Creation of a publisher
-							
+
 							AbstractPublisher publisher = PublisherFactory.createPublisher(pub_id);
 							listOfPublishers.add(publisher);
 						}
@@ -162,7 +169,7 @@ public class Orchestration {
 						action = "block";
 						sub_id = Integer.parseInt(st.nextToken());
 						channel_name = st.nextToken();
-						
+
 						AdministrationServer adminServer = new AdministrationServer();
 						adminServer.block(sub_id, channel_name, listOfSubscribers);
 					}
@@ -170,7 +177,7 @@ public class Orchestration {
 						action = "unblock";
 						sub_id = Integer.parseInt(st.nextToken());
 						channel_name = st.nextToken();
-						
+
 						AdministrationServer adminServer = new AdministrationServer();
 						adminServer.unBlock(sub_id, channel_name, listOfSubscribers);
 					}
@@ -202,7 +209,7 @@ public class Orchestration {
 			int[] PublisherConfigIntArray = new int[2];
 			for(int i = 0; i < PublisherConfigArray.length; i++)
 				PublisherConfigIntArray[i] = Integer.parseInt(PublisherConfigArray[i]);
-			
+
 			if(listOfPublishers.isEmpty()) {
 				newPub = PublisherFactory.createPublisher(
 						PublisherType.values()[PublisherConfigIntArray[0]],
@@ -225,9 +232,11 @@ public class Orchestration {
 							PublisherConfigIntArray[0]);
 					listOfPublishers.add(newPub);
 				}
+				
 			}
 			
 		}
+		
 		StrategyBufferedReader.close();
 		return listOfPublishers;
 	}
@@ -242,7 +251,7 @@ public class Orchestration {
 			int[] StateConfigIntArray = new int[2];
 			for(int i = 0; i < StateConfigArray.length; i++)
 				StateConfigIntArray[i] = Integer.parseInt(StateConfigArray[i]);			
-			
+
 			if(listOfSubscribers.isEmpty()) {
 				newSub = SubscriberFactory.createSubscriber(
 						SubscriberType.values()[StateConfigIntArray[0]], 
@@ -270,5 +279,5 @@ public class Orchestration {
 		StateBufferedReader.close();
 		return listOfSubscribers;
 	}
-	
+
 }

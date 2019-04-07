@@ -24,33 +24,11 @@ public class SubscriberFactory {
 	 * @return the newly created {@link AbstractSubscriber} instance 
 	 */
 	public static AbstractSubscriber createSubscriber(SubscriberType subscriberType, StateName stateName, int id) {
-		AbstractSubscriber CSA = null;
-		switch (subscriberType) {
-			case alpha : 
-				CSA = new ConcreteSubscriberA();
-				CSA.setID(id);
-				System.out.println("Subscriber " + CSA.getID() + " created");
-				CSA.setState(stateName);
-				return CSA;
-			case beta:
-				CSA = new ConcreteSubscriberA();
-				CSA.setID(id);
-				System.out.println("Subscriber " + CSA.getID() + " created");
-				CSA.setState(stateName);
-				return CSA;
-			case gamma:
-				CSA = new ConcreteSubscriberA();
-				CSA.setID(id);
-				System.out.println("Subscriber " + CSA.getID() + " created");
-				CSA.setState(stateName);
-				return CSA;
-			default: // what does the default case do????
-				CSA = new ConcreteSubscriberA();
-				CSA.setID(id);
-				System.out.println("Subscriber " + CSA.getID() + " created");
-				CSA.setState(stateName);
-				return CSA;
-		}
+		AbstractSubscriber CSA =  new ConcreteSubscriberA();
+		CSA.setID(id);
+		System.out.println("Subscriber " + CSA.getID() + " created");
+		CSA.setState(stateName);
+		return CSA;
 	}
 	
 }
