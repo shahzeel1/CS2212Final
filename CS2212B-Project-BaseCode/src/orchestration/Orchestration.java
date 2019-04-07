@@ -186,12 +186,12 @@ public class Orchestration {
 							}
 							if(!exists)
 							{
-							pub = PublisherFactory.createPublisher(pub_id);
-							listOfPublishers.add(pub);
+								pub = PublisherFactory.createPublisher(pub_id);
+								listOfPublishers.add(pub);
 							}
 						}
 					}
-					
+
 					else if(firstWord.equals("BLOCK")) {
 						System.out.println("");
 						action = "block";
@@ -274,6 +274,8 @@ public class Orchestration {
 		List<AbstractSubscriber> listOfSubscribers = new ArrayList<>();
 		AbstractSubscriber newSub;
 		BufferedReader StateBufferedReader = new BufferedReader(new FileReader(new File("States.sts")));
+		//create a counter that keep track of the subscriber type
+		int stype =0;
 		while(StateBufferedReader.ready()) {
 			String StateConfigLine = StateBufferedReader.readLine();
 			String[] StateConfigArray = StateConfigLine.split("\t");
@@ -281,13 +283,18 @@ public class Orchestration {
 			for(int i = 0; i < StateConfigArray.length; i++)
 				StateConfigIntArray[i] = Integer.parseInt(StateConfigArray[i]);			
 
+
+
+
 			if(listOfSubscribers.isEmpty()) {
 				newSub = SubscriberFactory.createSubscriber(
-						SubscriberType.values()[StateConfigIntArray[0]], 
-						StateName.values()[StateConfigIntArray[1]],
+						SubscriberType.values()[0], 
+						StateName.values()[StateConfigIntArray[stype]],
 						StateConfigIntArray[0]);
 				listOfSubscribers.add(newSub);
-			} else {				
+			} 
+			else 
+			{	
 				boolean exists = false;
 				for(AbstractSubscriber sub: listOfSubscribers) {
 					if(sub.getID() == StateConfigIntArray[0]) {
@@ -297,12 +304,21 @@ public class Orchestration {
 					}
 				}
 				if(!exists) {
+
 					newSub = SubscriberFactory.createSubscriber(
-							SubscriberType.values()[StateConfigIntArray[0]], 
+							SubscriberType.values()[stype], 
 							StateName.values()[StateConfigIntArray[1]],
 							StateConfigIntArray[0]);
 					listOfSubscribers.add(newSub);
 				}
+
+			}
+			//increment the type 
+			stype++;
+			//if the type is over 4 set it back to 0
+			if(stype>2)
+			{
+				stype=0;
 			}
 		}
 		StateBufferedReader.close();
