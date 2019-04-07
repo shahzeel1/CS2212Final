@@ -1,2 +1,5 @@
 PUB 4 TypeA  Hello Hello World
 PUB 4
+SUB 1 main
+BLOCK 0 cars
+UNBLOCK 0 cars

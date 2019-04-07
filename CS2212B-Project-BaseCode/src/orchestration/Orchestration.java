@@ -104,6 +104,7 @@ public class Orchestration {
 					String firstWord = st.nextToken();
 
 					if (firstWord.equals("SUB")) {
+						System.out.println("");
 						action = "subscribe";
 						sub_id = Integer.parseInt(st.nextToken());
 						channel_name = st.nextToken();
@@ -190,7 +191,9 @@ public class Orchestration {
 							}
 						}
 					}
+					
 					else if(firstWord.equals("BLOCK")) {
+						System.out.println("");
 						action = "block";
 						sub_id = Integer.parseInt(st.nextToken());
 						channel_name = st.nextToken();
@@ -199,6 +202,7 @@ public class Orchestration {
 						adminServer.block(sub_id, channel_name, listOfSubscribers);
 					}
 					else if(firstWord.equals("UNBLOCK")) {
+						System.out.println("");
 						action = "unblock";
 						sub_id = Integer.parseInt(st.nextToken());
 						channel_name = st.nextToken();
