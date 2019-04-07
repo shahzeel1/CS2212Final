@@ -82,7 +82,7 @@ public class Orchestration {
 			System.out.println("");
 
 		}
-		
+
 		//Method to parse the driver.txt file
 		BufferedReader driver;
 		try {
@@ -133,14 +133,13 @@ public class Orchestration {
 							//Create the event
 							EventMessage msg = new EventMessage(event_header, event_payload);
 							EventType type;
-							switch(event_type) {
-							case "TypeA": 
+							if(event_type.equals("TypeA")) 
 								type = EventType.values()[2];
-							case "TypeB": 
+							else if(event_type.equals( "TypeB")) 
 								type = EventType.values()[1];
-							default: 
+							else 
 								type = EventType.values()[0];
-							}
+
 							AbstractEvent event = EventFactory.createEvent(type, pub_id, msg);
 
 							//Find the publisher
@@ -148,21 +147,47 @@ public class Orchestration {
 							Iterator<AbstractPublisher> pubItr = listOfPublishers.iterator();
 							AbstractPublisher pub;
 
+							boolean exists = false;
 							while(pubItr.hasNext()) {
 								pub = pubItr.next();
 								if(pub.getID() == pub_id) {
 
 									pub.publish(event);
+									exists = true;
 									break;
 								}
+
+							}
+							if(!exists)
+							{
+								pub = PublisherFactory.createPublisher(pub_id);
+								listOfPublishers.add(pub);
+								pub.publish(event);
 							}
 						}
 
 						else {
 							// Creation of a publisher
+							//Find the publisher
 
-							AbstractPublisher publisher = PublisherFactory.createPublisher(pub_id);
-							listOfPublishers.add(publisher);
+							Iterator<AbstractPublisher> pubItr = listOfPublishers.iterator();
+							AbstractPublisher pub;
+
+							boolean exists = false;
+							while(pubItr.hasNext()) {
+								pub = pubItr.next();
+								if(pub.getID() == pub_id) {
+
+									pub.publish();
+									exists = true;
+									break;
+								}
+							}
+							if(!exists)
+							{
+							pub = PublisherFactory.createPublisher(pub_id);
+							listOfPublishers.add(pub);
+							}
 						}
 					}
 					else if(firstWord.equals("BLOCK")) {
@@ -232,11 +257,11 @@ public class Orchestration {
 							PublisherConfigIntArray[0]);
 					listOfPublishers.add(newPub);
 				}
-				
+
 			}
-			
+
 		}
-		
+
 		StrategyBufferedReader.close();
 		return listOfPublishers;
 	}
