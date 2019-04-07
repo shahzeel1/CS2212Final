@@ -14,13 +14,21 @@ public class SubscriptionManager {
 	private ChannelPoolManager cpManager;
 	private static SubscriptionManager instance = null;
 	
+	/**
+	 * Constructor initialize Subscription manager 
+	 * 
+	 */
 	private SubscriptionManager() {
 		cpManager = ChannelPoolManager.getInstance();
 	}
 	
+	/**
+	 * 
+	 * @return instance
+	 */
 	public static SubscriptionManager getInstance() {
 		if(instance == null) {
-			instance = new SubscriptionManager();
+			instance = new SubscriptionManager();// initialize instance if it isn't already done
 		}
 		return instance;
 	}

@@ -233,20 +233,24 @@ public class Orchestration {
 		AbstractPublisher newPub;
 		BufferedReader StrategyBufferedReader = new BufferedReader(new FileReader(new File("Strategies.str")));
 		while(StrategyBufferedReader.ready()) {
-			String PublisherConfigLine = StrategyBufferedReader.readLine();
+			String PublisherConfigLine = StrategyBufferedReader.readLine();// get the values 
 			String[] PublisherConfigArray = PublisherConfigLine.split("\t");
-			int[] PublisherConfigIntArray = new int[2];
+			int[] PublisherConfigIntArray = new int[2];// store the values in an array
+			// covert from string to integer
 			for(int i = 0; i < PublisherConfigArray.length; i++)
 				PublisherConfigIntArray[i] = Integer.parseInt(PublisherConfigArray[i]);
 
+			// if this is the first publisher that is being created, add it to the list 
 			if(listOfPublishers.isEmpty()) {
 				newPub = PublisherFactory.createPublisher(
 						PublisherType.values()[PublisherConfigIntArray[0]],
 						StrategyName.values()[PublisherConfigIntArray[1]],
 						PublisherConfigIntArray[0]);
 				listOfPublishers.add(newPub);
-			} else {				
+			} else {	
+				// boolean to see if the publisher exists
 				boolean exists = false;
+				// if it exists set the strategy to the one given
 				for(AbstractPublisher pub: listOfPublishers) {
 					if(pub.getID() == PublisherConfigIntArray[0]) {
 						pub.setStrategy(StrategyName.values()[PublisherConfigIntArray[1]]);
@@ -254,6 +258,7 @@ public class Orchestration {
 						break;
 					}
 				}
+				// if publisher doesn't exist, add it 
 				if(!exists) {
 					newPub = PublisherFactory.createPublisher(
 							PublisherType.values()[PublisherConfigIntArray[0]],
@@ -271,21 +276,21 @@ public class Orchestration {
 	}
 
 	private List<AbstractSubscriber> createSubscribers() throws IOException{
+		// create the list of subscribers 
 		List<AbstractSubscriber> listOfSubscribers = new ArrayList<>();
 		AbstractSubscriber newSub;
 		BufferedReader StateBufferedReader = new BufferedReader(new FileReader(new File("States.sts")));
 		//create a counter that keep track of the subscriber type
 		int stype =0;
 		while(StateBufferedReader.ready()) {
-			String StateConfigLine = StateBufferedReader.readLine();
+			String StateConfigLine = StateBufferedReader.readLine();// read the line from the file 
 			String[] StateConfigArray = StateConfigLine.split("\t");
 			int[] StateConfigIntArray = new int[2];
+			// store the values in an array 
 			for(int i = 0; i < StateConfigArray.length; i++)
 				StateConfigIntArray[i] = Integer.parseInt(StateConfigArray[i]);			
 
-
-
-
+			//add the first value in the list
 			if(listOfSubscribers.isEmpty()) {
 				newSub = SubscriberFactory.createSubscriber(
 						SubscriberType.values()[0], 
@@ -295,7 +300,8 @@ public class Orchestration {
 			} 
 			else 
 			{	
-				boolean exists = false;
+				boolean exists = false;// boolean to see if the subscriber exists 
+				// check to see if the subscriber exists and if it does update the state
 				for(AbstractSubscriber sub: listOfSubscribers) {
 					if(sub.getID() == StateConfigIntArray[0]) {
 						sub.setState(StateName.values()[StateConfigIntArray[1]]);
@@ -304,7 +310,7 @@ public class Orchestration {
 					}
 				}
 				if(!exists) {
-
+					// if the subscriber doesn't exist add it to the list
 					newSub = SubscriberFactory.createSubscriber(
 							SubscriberType.values()[stype], 
 							StateName.values()[StateConfigIntArray[1]],
