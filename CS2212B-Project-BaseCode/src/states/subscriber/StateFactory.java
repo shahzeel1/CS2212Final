@@ -16,6 +16,8 @@ public class StateFactory {
 	 * @return the newly created {@link IState} instance 
 	 */
 	public static IState createState(StateName stateName) {
+		
+		// Create the State object based on the stateType
 		switch(stateName) {
 			case astate : 
 				return new AState();
